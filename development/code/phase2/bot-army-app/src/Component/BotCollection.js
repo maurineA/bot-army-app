@@ -1,9 +1,9 @@
 // BotCollection.js
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
-const BotCollection = () => {
+const BotCollection = ({onEnlist}) => {
     
         const [bots, setBots] = useState([]);
       
@@ -31,10 +31,10 @@ const BotCollection = () => {
             <p>Armor: {bot.armor}</p>
             <p>Class: {bot.bot_class}</p>
             <img src={bot.avatar_url} alt={`${bot.name} Avatar`} />
-            <Link to={`/bot-specs/${bot.id}`}>
+            {/* <Link to={`/bot-specs/${bot.id}`}>
               <button>View Details</button>
-            </Link>
-            <button onClick={() => onBotClick(bot)}>Add to Army</button>
+            </Link> */}
+            <button onClick={() => onEnlist(bot)}>Enlist</button>
          
 
            
