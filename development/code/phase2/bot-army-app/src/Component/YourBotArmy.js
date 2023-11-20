@@ -24,7 +24,7 @@ const YourBotArmy = ({ enlistedBots, onEnlist, onRelease, onDischarge  }) => {
              <button onClick={() => onEnlist(bot)}>Enlist</button> 
             <button onClick={() => onRelease(bot)}>Release</button>
             <button onClick={() => onDischarge(bot)} className="red-button">
-              x
+              X
             </button>
            
             
