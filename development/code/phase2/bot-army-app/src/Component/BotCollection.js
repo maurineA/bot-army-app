@@ -1,6 +1,6 @@
 // BotCollection.js
 import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const BotCollection = ({onEnlist}) => {
@@ -22,7 +22,8 @@ const BotCollection = ({onEnlist}) => {
     <div>
       <h2>Bot Collection</h2>
       <ul>
-        {bots.map((bot) => (
+        
+      {bots.map((bot) => (
           <li key={bot.id}>
             <h3>{bot.name}</h3>
             <p>{bot.description}</p>
@@ -31,9 +32,9 @@ const BotCollection = ({onEnlist}) => {
             <p>Armor: {bot.armor}</p>
             <p>Class: {bot.bot_class}</p>
             <img src={bot.avatar_url} alt={`${bot.name} Avatar`} />
-            {/* <Link to={`/bot-specs/${bot.id}`}>
+            <Link to={`/bot-specs/${bot.id}`}>
               <button>View Details</button>
-            </Link> */}
+            </Link>
             <button onClick={() => onEnlist(bot)}>Enlist</button>
          
 
