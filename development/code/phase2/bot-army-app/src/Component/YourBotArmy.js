@@ -1,10 +1,35 @@
 // YourBotArmy.js
-import React from 'react';
-import { Link } from 'react-router-dom';
-const YourBotArmy = ({ enlistedBots, onEnlist, onRelease, onDischarge  }) => {
+import React, { useState, useEffect } from 'react';
+import { Link, Route } from 'react-router-dom';
 
+const BotDetails = ({ botId }) => {
+  const [botDetails, setBotDetails] = useState(null);
 
+  useEffect(() => {
+    fetch(`http://localhost:3000/bots/${botId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBotDetails(data);
+      });
+  }, [botId]);
 
+  return (
+    <div>
+      {botDetails && (
+        <div>
+          <h2>{botDetails.name} Details</h2>
+          {/* Display other details as needed */}
+          <p>Health: {botDetails.health}</p>
+          <p>Damage: {botDetails.damage}</p>
+          <p>Armor: {botDetails.armor}</p>
+          <p>Class: {botDetails.bot_class}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const YourBotArmy = ({ enlistedBots, onEnlist, onRelease, onDischarge }) => {
   return (
     <div>
       <h2>Your Bot Army</h2>
@@ -21,13 +46,16 @@ const YourBotArmy = ({ enlistedBots, onEnlist, onRelease, onDischarge  }) => {
             <Link to={`/bot-specs/${bot.id}`}>
               <button>View Details</button>
             </Link>
-             <button onClick={() => onEnlist(bot)}>Enlist</button> 
+            <button onClick={() => onEnlist(bot)}>Enlist</button>
             <button onClick={() => onRelease(bot)}>Release</button>
             <button onClick={() => onDischarge(bot)} className="red-button">
               X
             </button>
-           
-            
+
+            {/* Route for displaying detailed bot information */}
+            <Route path="/bot-specs/:botId">
+              <BotDetails />
+            </Route>
           </li>
         ))}
       </ul>
